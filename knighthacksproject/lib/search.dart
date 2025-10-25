@@ -71,7 +71,7 @@ class _SearchPageState extends State<SearchPage> {
               return List<ListTile>.generate(5, (int index) {
                 final String item = 'item $index';
                 return ListTile(
-                  title: Text(item),
+                  title: Text(item, style: GoogleFonts.nunito(color: minorTextColor),),
                   onTap: () {
                     setState(() {
                       controller.closeView(item);
