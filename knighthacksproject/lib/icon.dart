@@ -19,6 +19,15 @@ class SearchIcon extends StatelessWidget {
   }
 }
 
+class SearchUnfocusedIcon extends StatelessWidget {
+  const SearchUnfocusedIcon({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SvgPicture.asset('assets/searchUnfocus.svg', width: 18.0, height: 18.0);
+  }
+}
+
 class SavedIcon extends StatelessWidget {
   const SavedIcon({super.key});
 

@@ -3,7 +3,7 @@ import 'package:knighthacksproject/colors.dart';
 import 'package:knighthacksproject/icon.dart';
 import 'package:knighthacksproject/monitor.dart';
 import 'package:knighthacksproject/saved.dart';
-import 'package:knighthacksproject/searchPage.dart';
+import 'package:knighthacksproject/search.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 
 class Tabs extends StatefulWidget {
