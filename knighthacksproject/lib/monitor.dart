@@ -1,0 +1,16 @@
+import 'package:flutter/material.dart';
+import 'package:knighthacksproject/colors.dart';
+
+class MonitorPage extends StatefulWidget {
+  const MonitorPage({super.key});
+
+  @override
+  State<MonitorPage> createState() => _MonitorPageState();
+}
+
+class _MonitorPageState extends State<MonitorPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Text("Monitor Page", style: TextStyle(color: majorTextColor),);
+  }
+}
