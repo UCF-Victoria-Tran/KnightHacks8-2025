@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-const Color primary = Color(0xFF92C1FA);
-const Color error = Color(0xFF801F2C);
+const Color primary = Color(0xFF92C1FA); // 
+const Color error = Color(0xFF801F2C); //
 
 const Color bgLighter = Color(0xFF273349);
 const Color bgDarker = Color(0xFF0E141C);
