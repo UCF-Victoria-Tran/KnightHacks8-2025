@@ -26,6 +26,14 @@ class _SavedPageState extends State<SavedPage> {
     fit: BoxFit.cover,
   );
 
+  Future<void> _handleRefresh() async {
+    await Future.delayed(Duration(seconds: 2));
+    setState(() {
+      // add refresh API logic
+      print("refreshing");
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -48,25 +56,38 @@ class _SavedPageState extends State<SavedPage> {
       backgroundColor: bg,
       body: Padding(
         padding: const EdgeInsets.all(15),
-        child: GridView.count(
-          crossAxisCount: crossAxisCount,
-          mainAxisSpacing: 20,
-          crossAxisSpacing: 20,
-          childAspectRatio: childAspectRatio,
-          children: [
-            MangaCard("Gachiakuta", mangaImagePlaceholder, true, 212),
-            MangaCard("The God of High School",mangaImagePlaceholder,false,0,),
-            MangaCard("Jujutsu Kaisen", mangaImagePlaceholder, true, 12),
-            MangaCard("Attack on Titan", mangaImagePlaceholder, false, 0),
-            MangaCard("Chainsaw Man", mangaImagePlaceholder, false, 0),
-            MangaCard("One Piece", mangaImagePlaceholder, true, 4),
-            MangaCard("Boku no Hero Academia", mangaImagePlaceholder, false, 0),
-            MangaCard("Tokyo Ghoul", mangaImagePlaceholder, false, 0),
-            MangaCard("Death Note", mangaImagePlaceholder, false, 0),
-            MangaCard("Dragon Ball", mangaImagePlaceholder, false, 0),
-            MangaCard("Naruto", mangaImagePlaceholder, true, 36),
-            MangaCard("Bleach", mangaImagePlaceholder, false, 0),
-          ],
+        child: RefreshIndicator(
+          onRefresh: _handleRefresh,
+          child: GridView.count(
+            crossAxisCount: crossAxisCount,
+            mainAxisSpacing: 20,
+            crossAxisSpacing: 20,
+            childAspectRatio: childAspectRatio,
+            children: [
+              MangaCard("Gachiakuta", mangaImagePlaceholder, true, 212),
+              MangaCard(
+                "The God of High School",
+                mangaImagePlaceholder,
+                false,
+                0,
+              ),
+              MangaCard("Jujutsu Kaisen", mangaImagePlaceholder, true, 12),
+              MangaCard("Attack on Titan", mangaImagePlaceholder, false, 0),
+              MangaCard("Chainsaw Man", mangaImagePlaceholder, false, 0),
+              MangaCard("One Piece", mangaImagePlaceholder, true, 4),
+              MangaCard(
+                "Boku no Hero Academia",
+                mangaImagePlaceholder,
+                false,
+                0,
+              ),
+              MangaCard("Tokyo Ghoul", mangaImagePlaceholder, false, 0),
+              MangaCard("Death Note", mangaImagePlaceholder, false, 0),
+              MangaCard("Dragon Ball", mangaImagePlaceholder, false, 0),
+              MangaCard("Naruto", mangaImagePlaceholder, true, 36),
+              MangaCard("Bleach", mangaImagePlaceholder, false, 0),
+            ],
+          ),
         ),
       ),
     );

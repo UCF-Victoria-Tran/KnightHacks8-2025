@@ -19,6 +19,23 @@ class _SearchPageState extends State<SearchPage> {
     'Chainsaw Man'
   ];
 
+  bool _showWidgetAfterSearch = false;
+
+  Widget _widgetAfterSearch() {
+    return Container(
+      padding: const EdgeInsets.all(8.0),
+      margin: const EdgeInsets.symmetric(horizontal: 10.0),
+      decoration: BoxDecoration(
+        color: unfocusedTextColor.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+      child: Text(
+        'You selected ${searchBarItems.first}!',
+        style: GoogleFonts.nunito(color: majorTextColor, fontSize: 16),
+      ),
+    );
+  }
+
   // loading bar, haven't changed the colors yet
   Widget loadingBar() {
     return const LinearProgressIndicator();
@@ -87,6 +104,11 @@ class _SearchPageState extends State<SearchPage> {
                   onTap: () {
                     setState(() {
                       controller.closeView(item);
+                      if (index == 0) {
+                        _showWidgetAfterSearch = true;
+                      } else {
+                        _showWidgetAfterSearch = false;
+                      }
                     });
                   },
                 );
@@ -94,6 +116,10 @@ class _SearchPageState extends State<SearchPage> {
             },
           ),
         ),
+        if (_showWidgetAfterSearch) ...[
+          const SizedBox(height: 15),
+          _widgetAfterSearch()
+        ]
       ],
     ));
   }
