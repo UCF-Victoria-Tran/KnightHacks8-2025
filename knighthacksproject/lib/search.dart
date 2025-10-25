@@ -11,9 +11,21 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+  final List<String> searchBarItems = [
+    'One Piece',
+    'Pokemon',
+    'Gachiakuta',
+    'Solo Leveling',
+    'Chainsaw Man'
+  ];
+
   // loading bar, haven't changed the colors yet
   Widget loadingBar() {
     return const LinearProgressIndicator();
+  }
+
+  void editSearchBarItems() {
+    
   }
 
   @override
@@ -68,10 +80,10 @@ class _SearchPageState extends State<SearchPage> {
               BuildContext context,
               SearchController controller,
             ) {
-              return List<ListTile>.generate(5, (int index) {
-                final String item = 'item $index';
+              return List<ListTile>.generate(searchBarItems.length, (int index) {
+                final String item = searchBarItems[index];
                 return ListTile(
-                  title: Text(item, style: GoogleFonts.nunito(color: minorTextColor),),
+                  title: Text(item, style: GoogleFonts.nunito(color: majorTextColor),),
                   onTap: () {
                     setState(() {
                       controller.closeView(item);
