@@ -63,18 +63,17 @@ class _SearchPageState extends State<SearchPage> {
               BuildContext context,
               SearchController controller,
             ) {
-              return const <Widget>[];
-              // return List<ListTile>.generate(5, (int index) {
-              //   final String item = 'item $index';
-              //   return ListTile(
-              //     title: Text(item),
-              //     onTap: () {
-              //       setState(() {
-              //         controller.closeView(item);
-              //       });
-              //     },
-              //   );
-              // });
+              return List<ListTile>.generate(5, (int index) {
+                final String item = 'item $index';
+                return ListTile(
+                  title: Text(item),
+                  onTap: () {
+                    setState(() {
+                      controller.closeView(item);
+                    });
+                  },
+                );
+              });
             },
           ),
         ),

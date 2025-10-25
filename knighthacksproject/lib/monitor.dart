@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:knighthacksproject/colors.dart';
 
+// TODO: fix when multiple manga/manhwa are in the list it will go through
+// the box constraints. Got to append and add a ListViewer/horizontal scroll
+
 class MonitorPage extends StatefulWidget {
   const MonitorPage({super.key});
 
@@ -14,12 +17,28 @@ class _MonitorPageState extends State<MonitorPage> {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         for (var title in titles)
-          Container(
-            padding: EdgeInsets.all(2),
-            margin: EdgeInsets.all(2),
-            color: bg,
-            child: Text(title, style: TextStyle(color: minorTextColor)),
-          ),
+          (title.length > 20)
+              ? ClipRRect(
+                borderRadius: BorderRadius.circular(15.0),
+                child: Container(
+                  padding: EdgeInsets.all(5),
+                  margin: EdgeInsets.all(2),
+                  color: bg,
+                  child: Text(
+                    "${title.substring(20)}...",
+                    style: TextStyle(fontSize: 9, color: minorTextColor),
+                  ),
+                ),
+              )
+              : ClipRRect(
+                borderRadius: BorderRadius.circular(15.0),
+                child: Container(
+                  padding: EdgeInsets.all(5),
+                  margin: EdgeInsets.all(2),
+                  color: bg,
+                  child: Text(title, style: TextStyle(fontSize: 9, color: minorTextColor)),
+                ),
+              ),
       ],
     );
   }
@@ -59,7 +78,7 @@ class _MonitorPageState extends State<MonitorPage> {
                     children: [
                       Text(
                         siteName,
-                        style: TextStyle(fontSize: 20, color: majorTextColor),
+                        style: TextStyle(fontSize: 16, color: majorTextColor),
                         textAlign: TextAlign.left,
                       ),
                       savedTitleCards(titles),
