@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:knighthacksproject/colors.dart';
 import 'package:knighthacksproject/icon.dart';
 
@@ -10,6 +11,11 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+  // loading bar, haven't changed the colors yet
+  Widget loadingBar() {
+    return const LinearProgressIndicator();
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -37,13 +43,13 @@ class _SearchPageState extends State<SearchPage> {
             viewBackgroundColor: bgDarker,
             viewSurfaceTintColor: unfocusedTextColor,
             viewHintText: "Search",
-            headerHintStyle: TextStyle(color: unfocusedTextColor),
-            headerTextStyle: TextStyle(color: minorTextColor),
+            headerHintStyle: GoogleFonts.nunito(color: unfocusedTextColor),
+            headerTextStyle: GoogleFonts.nunito(color: minorTextColor),
             builder: (BuildContext context, SearchController controller) {
               return SearchBar(
                 hintText: "Search",
-                textStyle: WidgetStatePropertyAll<TextStyle>(TextStyle(color: minorTextColor)),
-                hintStyle: WidgetStatePropertyAll<TextStyle>(TextStyle(color: unfocusedTextColor)),
+                textStyle: WidgetStatePropertyAll<TextStyle>(GoogleFonts.nunito(color: minorTextColor)),
+                hintStyle: WidgetStatePropertyAll<TextStyle>(GoogleFonts.nunito(color: unfocusedTextColor)),
                 backgroundColor: WidgetStatePropertyAll<Color>(bgDarker),
                 controller: controller,
                 padding: const WidgetStatePropertyAll<EdgeInsets>(
@@ -58,7 +64,6 @@ class _SearchPageState extends State<SearchPage> {
                 leading: const SearchUnfocusedIcon(),
               );
             },
-            // adjust this to popular titles?
             suggestionsBuilder: (
               BuildContext context,
               SearchController controller,

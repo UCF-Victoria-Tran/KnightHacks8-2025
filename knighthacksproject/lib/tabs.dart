@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:knighthacksproject/colors.dart';
 import 'package:knighthacksproject/icon.dart';
 import 'package:knighthacksproject/monitor.dart';
@@ -30,6 +31,7 @@ class _TabsState extends State<Tabs> {
         title: "Monitor",
         activeForegroundColor: primary,
         inactiveForegroundColor: primary,
+        textStyle: GoogleFonts.nunito(color: primary)
       ),
     ),
     PersistentTabConfig(
@@ -39,6 +41,7 @@ class _TabsState extends State<Tabs> {
         title: "Search",
         activeForegroundColor: primary,
         inactiveForegroundColor: primary,
+        textStyle: GoogleFonts.nunito(color: primary)
       ),
     ),
     PersistentTabConfig(
@@ -48,6 +51,7 @@ class _TabsState extends State<Tabs> {
         title: "Saved",
         activeForegroundColor: primary,
         inactiveForegroundColor: primary,
+        textStyle: GoogleFonts.nunito(color: primary)
       ),
     ),
   ];

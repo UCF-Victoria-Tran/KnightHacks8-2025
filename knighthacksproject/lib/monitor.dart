@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:knighthacksproject/colors.dart';
 
 // TODO: fix when multiple manga/manhwa are in the list it will go through
@@ -12,6 +13,14 @@ class MonitorPage extends StatefulWidget {
 }
 
 class _MonitorPageState extends State<MonitorPage> {
+  Future<void> _handleRefresh() async {
+    await Future.delayed(Duration(seconds: 2));
+    setState(() {
+      // add refresh API logic
+      print("refreshing");
+    });
+  }
+
   Widget savedTitleCards(List<String> titles) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -26,7 +35,10 @@ class _MonitorPageState extends State<MonitorPage> {
                   color: bg,
                   child: Text(
                     "${title.substring(20)}...",
-                    style: TextStyle(fontSize: 9, color: minorTextColor),
+                    style: GoogleFonts.nunito(
+                      fontSize: 9,
+                      color: minorTextColor,
+                    ),
                   ),
                 ),
               )
@@ -36,7 +48,13 @@ class _MonitorPageState extends State<MonitorPage> {
                   padding: EdgeInsets.all(5),
                   margin: EdgeInsets.all(2),
                   color: bg,
-                  child: Text(title, style: TextStyle(fontSize: 9, color: minorTextColor)),
+                  child: Text(
+                    title,
+                    style: GoogleFonts.nunito(
+                      fontSize: 9,
+                      color: minorTextColor,
+                    ),
+                  ),
                 ),
               ),
       ],
@@ -99,16 +117,21 @@ class _MonitorPageState extends State<MonitorPage> {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    return ListView(
-      padding: const EdgeInsets.all(15),
-      children: [
-        MonitoringCard(screenWidth - 20, 'Mangadex', [
-          'Chainsaw Man',
-          'Gachiakuta',
-        ], false),
-        SizedBox(height: 15),
-        MonitoringCard(screenWidth - 20, 'Asurascans', ['One Piece'], true),
-      ],
+    
+    return RefreshIndicator(
+      onRefresh: _handleRefresh,
+      child: ListView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        padding: const EdgeInsets.all(15),
+        children: [
+          MonitoringCard(screenWidth - 20, 'Mangadex', [
+            'Chainsaw Man',
+            'Gachiakuta',
+          ], false),
+          SizedBox(height: 15),
+          MonitoringCard(screenWidth - 20, 'Asurascans', ['One Piece'], true),
+        ],
+      ),
     );
   }
 }

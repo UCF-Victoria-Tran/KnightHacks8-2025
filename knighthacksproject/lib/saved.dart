@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:knighthacksproject/colors.dart';
 
 class SavedPage extends StatefulWidget {
@@ -11,6 +12,6 @@ class SavedPage extends StatefulWidget {
 class _SavedPageState extends State<SavedPage> {
   @override
   Widget build(BuildContext context) {
-    return Text("Saved Page", style: TextStyle(color: majorTextColor),);
+    return Text("Saved Page", style: GoogleFonts.nunito(color: majorTextColor),);
   }
 }

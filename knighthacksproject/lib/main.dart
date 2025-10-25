@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:knighthacksproject/tabs.dart';
 
 void main() {
@@ -10,11 +11,6 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  // loading bar, haven't changed the colors yet
-  Widget loadingBar() {
-    return const LinearProgressIndicator();
-  }
 
   @override
   Widget build(BuildContext context) {
