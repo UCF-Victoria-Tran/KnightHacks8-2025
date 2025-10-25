@@ -9,26 +9,86 @@ class MonitorPage extends StatefulWidget {
 }
 
 class _MonitorPageState extends State<MonitorPage> {
+  Widget savedTitleCards(List<String> titles) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        for (var title in titles)
+          Container(
+            padding: EdgeInsets.all(2),
+            margin: EdgeInsets.all(2),
+            color: bg,
+            child: Text(title, style: TextStyle(color: minorTextColor)),
+          ),
+      ],
+    );
+  }
+
+  Widget MonitoringCard(
+    double width,
+    String siteName,
+    List<String> titles,
+    bool isError,
+  ) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(15.0),
+      child: Stack(
+        children: [
+          SizedBox(height: 60, width: width, child: Container(color: bgDarker)),
+          SizedBox(
+            width: width,
+            height: 60,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: 60,
+                  height: 50,
+                  child: Padding(
+                    padding: const EdgeInsets.all(5),
+                    child: CircleAvatar(radius: 10),
+                  ),
+                ),
+                SizedBox(
+                  width: width - 120,
+                  height: 60,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        siteName,
+                        style: TextStyle(fontSize: 20, color: majorTextColor),
+                        textAlign: TextAlign.left,
+                      ),
+                      savedTitleCards(titles),
+                    ],
+                  ),
+                ),
+                (isError)
+                    ? SizedBox(width: 20, child: Container(color: error))
+                    : SizedBox(width: 20),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
     return ListView(
       padding: const EdgeInsets.all(15),
-      children: <Widget>[
-        Container(
-          height: 60,
-          color: Colors.amber[600],
-          child: const Center(child: Text('Entry A')),
-        ),
-        Container(
-          height: 60,
-          color: Colors.amber[500],
-          child: const Center(child: Text('Entry B')),
-        ),
-        Container(
-          height: 60,
-          color: Colors.amber[100],
-          child: const Center(child: Text('Entry C')),
-        ),
+      children: [
+        MonitoringCard(screenWidth - 20, 'Mangadex', [
+          'Chainsaw Man',
+          'Gachiakuta',
+        ], false),
+        SizedBox(height: 15),
+        MonitoringCard(screenWidth - 20, 'Asurascans', ['One Piece'], true),
       ],
     );
   }
