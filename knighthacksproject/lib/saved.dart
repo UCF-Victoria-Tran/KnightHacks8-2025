@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:knighthacksproject/colors.dart';
 import 'package:knighthacksproject/manga_card.dart';
 
@@ -26,12 +28,60 @@ class _SavedPageState extends State<SavedPage> {
     fit: BoxFit.cover,
   );
 
+  Map<String, List<Map<String, dynamic>>> groupedManga = {};
+
+  @override
+  void initState() {
+    super.initState();
+    loadAndGroupManga();
+  }
+
   Future<void> _handleRefresh() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
     setState(() {
-      // add refresh API logic
       print("refreshing");
     });
+  }
+
+  Future<void> loadAndGroupManga() async {
+    final String response = await rootBundle.loadString('assets/test.json');
+    final List<dynamic> data = json.decode(response);
+
+    groupedManga.clear();
+
+    for (var item in data) {
+      final String identifier = item['identifier'];
+
+      final mangaEntry = {
+        "title": item['title'],
+        "read_chapters": item['read_chapters'] ?? 0,
+        "total_chapters": item['total_chapters'] ?? 0,
+        "identifier": item['identifier'],
+        "cover_image": item['cover_image'] ?? mangaImagePlaceholder,
+      };
+
+      if (!groupedManga.containsKey(identifier)) {
+        groupedManga[identifier] = [];
+      }
+      groupedManga[identifier]!.add(mangaEntry);
+    }
+
+    setState(() {});
+  }
+
+  // Function to compute if there should be a notification
+  bool computeHasNotification(Map<String, dynamic> manga) {
+    return (manga['identifier'] == "Waiting for updates") &&
+        (manga['total_chapters'] > manga['read_chapters']);
+  }
+
+  // Function to compute notification count
+  int computeNotificationCount(Map<String, dynamic> manga, bool hasNotification) {
+    if (hasNotification) {
+      return manga['total_chapters'] - manga['read_chapters'];
+    } else {
+      return 0;
+    }
   }
 
   @override
@@ -40,14 +90,13 @@ class _SavedPageState extends State<SavedPage> {
 
     int crossAxisCount;
     if (screenWidth < 450) {
-      crossAxisCount = 2; // < 450px wide: 2 columns
+      crossAxisCount = 2;
     } else if (screenWidth <= 700) {
-      crossAxisCount = 3; // 450px to 700px wide: 3 columns
+      crossAxisCount = 3;
     } else {
-      crossAxisCount = 4; // > 700px wide: 4 columns
+      crossAxisCount = 4;
     }
 
-    // calculate the aspect ratio to maintain card shape consistency
     final double cardHeight = 350;
     final double cardWidth = 240;
     final double childAspectRatio = cardWidth / cardHeight;
@@ -58,35 +107,38 @@ class _SavedPageState extends State<SavedPage> {
         padding: const EdgeInsets.all(15),
         child: RefreshIndicator(
           onRefresh: _handleRefresh,
-          child: GridView.count(
-            crossAxisCount: crossAxisCount,
-            mainAxisSpacing: 20,
-            crossAxisSpacing: 20,
-            childAspectRatio: childAspectRatio,
-            children: [
-              MangaCard("Gachiakuta", mangaImagePlaceholder, true, 212),
-              MangaCard(
-                "The God of High School",
-                mangaImagePlaceholder,
-                false,
-                0,
-              ),
-              MangaCard("Jujutsu Kaisen", mangaImagePlaceholder, true, 12),
-              MangaCard("Attack on Titan", mangaImagePlaceholder, false, 0),
-              MangaCard("Chainsaw Man", mangaImagePlaceholder, false, 0),
-              MangaCard("One Piece", mangaImagePlaceholder, true, 4),
-              MangaCard(
-                "Boku no Hero Academia",
-                mangaImagePlaceholder,
-                false,
-                0,
-              ),
-              MangaCard("Tokyo Ghoul", mangaImagePlaceholder, false, 0),
-              MangaCard("Death Note", mangaImagePlaceholder, false, 0),
-              MangaCard("Dragon Ball", mangaImagePlaceholder, false, 0),
-              MangaCard("Naruto", mangaImagePlaceholder, true, 36),
-              MangaCard("Bleach", mangaImagePlaceholder, false, 0),
-            ],
+          child: ListView(
+            children: groupedManga.entries.map((entry) {
+              final identifier = entry.key;
+              final mangaList = entry.value;
+
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    identifier,
+                    style: const TextStyle(fontSize: 20, color: Colors.white),
+                  ),
+                  const SizedBox(height: 10),
+                  GridView.count(
+                    crossAxisCount: crossAxisCount,
+                    mainAxisSpacing: 20,
+                    crossAxisSpacing: 20,
+                    childAspectRatio: childAspectRatio,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    children: mangaList.map((manga) {
+                      final bool hasNotification = computeHasNotification(manga);
+                      final int notificationCount = computeNotificationCount(manga, true);
+
+                      return MangaCard(manga['title'], mangaImagePlaceholder, hasNotification, notificationCount,
+                      );
+                    }).toList(),
+                  ),
+                  const SizedBox(height: 20),
+                ],
+              );
+            }).toList(),
           ),
         ),
       ),

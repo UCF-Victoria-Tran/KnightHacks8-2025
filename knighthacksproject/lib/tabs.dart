@@ -35,15 +35,16 @@ class _TabsState extends State<Tabs> {
       ),
     ),
     PersistentTabConfig(
-      screen: const SearchPage(),
-      item: ItemConfig(
-        icon: SearchIcon(),
-        title: "Search",
-        activeForegroundColor: primary,
-        inactiveForegroundColor: primary,
-        textStyle: GoogleFonts.nunito(color: primary)
-      ),
+    screen: const SearchPage(),
+    item: ItemConfig(
+      icon: SearchIcon(),
+      title: "Search",
+      activeForegroundColor: primary,
+      inactiveForegroundColor: primary,
+      textStyle: GoogleFonts.nunito(color: primary),
     ),
+  ),
+
     PersistentTabConfig(
       screen: const SavedPage(),
       item: ItemConfig(

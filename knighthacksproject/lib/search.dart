@@ -14,7 +14,7 @@ class _SearchPageState extends State<SearchPage> {
   final List<String> searchBarItems = [
     'One Piece',
     'Pokemon',
-    'Gachiakuta',
+    'Gachi Akuta',
     'Solo Leveling',
     'Chainsaw Man'
   ];

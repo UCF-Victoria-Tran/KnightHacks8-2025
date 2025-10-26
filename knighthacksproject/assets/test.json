@@ -1,0 +1,58 @@
+[
+  {
+    "title": "Omniscient Readers Viewpoint",
+    "website": "AsuraScans",
+    "read_chapters": 90,
+    "total_chapters": 285,
+    "cover_image": "assets/mangaImage1.svg",
+    "identifier": "Reading"
+  },
+  {
+    "title": "Solo Leveling Ragnarok",
+    "website": "AsuraScans",
+    "read_chapters": 60,
+    "total_chapters": 60,
+    "cover_image": "assets/mangaImage2.svg",
+    "identifier": "Waiting for updates"
+  },
+  {
+    "title": "Chainsaw Man",
+    "website": "Mangakakalot.gg",
+    "read_chapters": 182,
+    "total_chapters": 182,
+    "cover_image": "assets/mangaImage3.svg",
+    "identifier": "Waiting for updates"
+  },
+  {
+    "title": "Gachi Akuta",
+    "website": "MangaRead.org",
+    "read_chapters": 100,
+    "total_chapters": 121,
+    "cover_image": "assets/mangaImage3.svg",
+    "identifier": "Waiting for updates"
+  },
+  {
+    "title": "Shangri-La Frontier",
+    "website": "MangaRead.org",
+    "read_chapters": 241,
+    "total_chapters": 241,
+    "cover_image": "assets/mangaImage5.svg",
+    "identifier": "Waiting for updates"
+  },
+  {
+    "title": "Survival Story of a Sword King",
+    "website": "MangaRead.org",
+    "read_chapters": 178,
+    "total_chapters": 178,
+    "cover_image": "assets/mangaImage6.svg",
+    "identifier": "Waiting for updates"
+  },
+  {
+    "title": "One Piece",
+    "website": "Mangakakalot.gg",
+    "read_chapters": 1124,
+    "total_chapters": 1130,
+    "cover_image": "assets/mangaImage7.svg",
+    "identifier": "Waiting for updates"
+  }
+]
